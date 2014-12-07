@@ -1,0 +1,59 @@
+<div id="SHELL">
+	<p id="title">Diploma</p>
+	<div class="nav clearfix">
+		<!-- ><div data-bind="foreach: router.navigationModel">
+			<div class='menuitem' data-bind="attr: {id: id}, html: title"></div>
+		</div> -->
+		
+		<div class='menuitem'>
+			Services
+		</div>
+		<div class='serviceItem' id="googleConnect">
+			<img src="images/google_drive_original_button.png" />
+					Google drive
+		</div>
+		<div class='serviceItem' id="dropboxConnect">
+			<img src="images/dropbox_button.png" />
+					Dropbox
+		</div>
+		
+		<!-- <div class='serviceItem' id="oneDriveConnect">
+			<img src="images/onedrive-logo.png" />
+					OneDrive
+		</div> -->
+		
+		<div class='serviceItem' id="yandexConnect">
+			<img src="images/yandex-disk-.png" />
+					Yandex.Disk
+		</div>
+		
+		<div class='serviceItem' id="boxConnect">
+			<img src="images/box-icon.png" />
+					Box
+		</div>
+		
+	</div>
+
+	<div id="serviceDiv" class="clearfix">
+		<div data-bind="compose: 'modul/google/index'" id="google"></div>
+		<div data-bind="compose: 'modul/dropbox/index'" id="dropbox"></div>
+		<!-- <div data-bind="compose: 'modul/onedrive/index'"></div> -->
+		<div data-bind="compose: 'modul/yandex/index'" id="yandex"></div>
+		<div data-bind="compose: 'modul/box/index'" id="box"></div>
+	</div> 
+	
+	<div id="serviceChooser" class="popupDiv">
+		<div id="fade" class="black_overlay"></div>
+		<div id="service" class="whiteDiv popup">
+			<h4>Select what you want service go to small!</h4>
+			<div data-bind="foreach: visibleService">
+				<button class="redButton" data-bind="text: $data.name, click: $root.changeService.bind($data,$root)"></button>
+			</div>			
+			<button class="greyButton" data-bind="click: $root.closePopup.bind($root)">Cancel</button>
+		</div>
+	</div>
+	
+	<iframe id="hiddenFrame" hidden=hidden></iframe>
+</div>
+
+<div class="container-fluid page-host" data-bind="router: { transition:'entrance' }"></div>

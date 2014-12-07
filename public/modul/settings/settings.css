@@ -1,0 +1,12 @@
+#SETTINGS {
+	
+}
+
+#SETTINGS ul {
+	border: 1px solid black;
+	min-height: 30px;
+}
+
+#SETTINGS ul li {
+	cursor: default;
+}

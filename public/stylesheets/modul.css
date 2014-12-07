@@ -1,0 +1,268 @@
+/*
+@import "/modul/shell/shell.css";
+
+@import "/modul/services/services.css";
+
+@import "/modul/google/google.css";
+
+@import "/modul/dropbox/dropbox.css";
+
+@import "/modul/yandex/yandex.css";
+
+@import "/modul/onedrive/onedrive.css";
+
+@import "/modul/settings/settings.css";
+*/
+
+#SHELL {
+	background-color: #0B614B;
+	height: 50px;
+}
+
+#SHELL div.nav {
+	height: 50px;
+}
+
+#SHELL div.nav div.menuitem {
+	float: left;
+	font-size: 18px;
+	padding: 16px;
+	cursor: pointer;
+	margin: 0 1px;
+	color: #FBFBEF;
+	background-color: #088A85;
+}
+
+#SHELL div.nav div.serviceItem {
+	float: left;
+	font-size: 16px;
+	padding: 12px 16px;
+	cursor: pointer;
+	margin: 0 1px;
+	color: #FBFBEF;
+	opacity: 0.4;
+}
+
+#SHELL div.nav div.serviceItem img{
+	max-width: 30px;
+	height: 25px;
+	margin: 0 5px 0 -10px;
+	opacity: 1;
+}
+
+/*#SHELL div.nav div.menuitem:hover {
+	background-color: #088A85;
+}*/
+
+#SHELL div.nav div.serviceItem:hover {
+	/*background-color: #088A85;*/
+	opacity: 0.9;
+}
+
+#SHELL div.nav div.active {
+	background: transparent;
+	opacity: 1;
+}
+
+#SHELL div.nav div.small {
+	background-color: #339966;
+	opacity: 1;
+}
+
+#SHELL p#title{
+	float: left;
+	color: #FBFBEF;
+	font-size: 24px;
+	margin: 12px 75px 0px 15px;
+}
+
+#SHELL #serviceChooser {
+	background-color: #8cc540;
+}
+
+#SHELL #serviceChooser div.chooserContainer {
+	width: 50%;
+	border: 5px ridge #8cc540;
+	border-bottom: 0;
+	padding: 3px 5px;
+}
+
+#SHELL #serviceChooser div img.option {
+	width: 25px;
+	height: 25px;
+	margin: 0 5px;
+	cursor: pointer;
+}
+
+#SHELL #serviceChooser div img.option:hover {
+	opacity: 0.7;
+}
+
+#SHELL #serviceDiv {
+	
+}
+
+#SHELL #serviceDiv div.service {
+	width: 50%;
+	float: left;
+	cursor: default;
+	border: 5px ridge #8cc540;
+	/*border-top: 0;*/
+	margin-bottom: 3px;
+	background-color: #fefefe;
+}
+
+#SHELL #serviceDiv #header {
+	padding: 3px;
+	background-color: #8cc540;
+	color: floralwhite;
+}
+
+#SHELL #serviceDiv #header h5 {
+	margin: 0;
+}
+
+#SHELL #serviceDiv #header #headIcon span.glyphicon{
+	cursor: pointer;
+}
+
+#SHELL #serviceDiv #content #iconDiv {
+	padding: 5px;
+}
+
+#SHELL #serviceDiv #content #iconDiv button {
+	
+}
+
+#SHELL #serviceDiv div.scrollableTable {
+	/*height: 800px;*/
+	overflow: auto;
+}
+
+#SHELL #serviceDiv table {
+	min-width: 100%;
+}
+
+#SHELL #serviceDiv table tr {
+	cursor: default;
+}
+
+#SHELL #serviceDiv table thead {
+	
+}
+
+#SHELL #serviceDiv table thead tr {
+	background-color: #8cc540;
+	color: floralwhite;
+	border-top: 1px solid #0B614B;
+}
+
+#SHELL #serviceDiv table thead th {
+	padding: 5px 3px;
+}
+
+#SHELL #serviceDiv table tbody {
+	
+}
+
+#SHELL #serviceDiv table tbody tr {
+	background-color: #fefefe;
+	border-bottom: 1px solid #0B614B;
+	color: #0B614B;
+}
+#SHELL #serviceDiv table tbody tr.active {
+	background-color: #ffc;
+}
+
+#SHELL #serviceDiv table tbody tr:hover {
+	background-color: #ffc;
+}
+
+#SHELL #serviceDiv table tbody td {
+	padding: 5px 3px;
+	max-width: 150px;
+	overflow-wrap: break-word;
+}
+
+#SHELL #serviceDiv table tbody td span {
+	
+}
+
+#SHELL #serviceDiv table tbody td span.glyphicon {
+	font-size: 14px;
+	color: #0B614B;
+}
+
+#SHELL #serviceDiv table tbody td span.action {
+	cursor: pointer;
+	margin: 3px;
+}
+
+#SHELL #serviceDiv table tbody td img.typeIcon {
+	width: 10px;
+	height: 10px;
+}
+
+#SHELL #serviceDiv table tbody td p {
+	margin: 0;
+}
+
+#SHELL .popupDiv {
+	display: none;
+}
+
+#SHELL .popup {
+	position: absolute;
+	top: 25%;
+	left: 37%;
+	width: 26%;
+	padding: 16px;
+	z-index: 3;
+	overflow: auto;
+	text-align: center;
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+}
+
+#SHELL .popup button {
+	margin: 5px 5px 5px 0;
+}
+
+#SHELL #serviceDiv #content #uploadDiv input {
+	margin: 10px auto;
+	width: 38%;
+}
+
+#SHELL #loading.popupDiv .black_overlay {
+	z-index: 3;
+}
+
+#SHELL #loading.popupDiv .popup {
+	z-index: 4;
+}
+
+#SHELL #serviceDiv #content #exportDiv #checkDiv {
+	text-align: left;
+	position: relative;
+	margin: 5px;
+	width: 40%;
+	left: 30%;
+}
+
+#SHELL #serviceDiv #content #exportDiv #checkDiv .check {
+	margin: 10px 0;
+}
+
+#SHELL #serviceDiv #content #exportDiv #checkDiv .check img {
+	width: 15px;
+	height: 15px;
+}
+
+#SHELL #serviceDiv #content #exportDiv #checkDiv .check img.active {
+	background-color: #8cc540;
+}
+
+#SHELL #serviceDiv #content #exportDiv #checkDiv .check span {
+	
+}

@@ -1,0 +1,105 @@
+#SERVICES {
+	
+}
+
+#SERVICES #leftDiv {
+	width: 14%;
+	text-align: center;
+	float: left
+}
+
+#SERVICES #leftDiv ul li button {
+	width: 85%;
+	margin: 5px 0;
+}
+
+#SERVICES #leftDiv ul li button img {
+	max-width: 30px;
+	height: 25px;
+	margin: 0 5px 0 -10px;
+}
+
+#SERVICES #rightDiv {
+	padding: 15px;
+}
+
+#SERVICES #rightDiv div.service {
+	width: 49%;
+	margin: 5px;
+	float: left;
+	border: 2px solid #bbb;
+	background-color: #fefefe;
+}
+
+#SERVICES #rightDiv div.scrollableTable {
+	height: 300px;
+	overflow: auto;
+}
+
+#SERVICES #rightDiv table {
+	min-width: 100%;
+}
+
+#SERVICES #rightDiv table tr {
+	cursor: default;
+}
+
+#SERVICES #rightDiv table thead {
+	
+}
+
+#SERVICES #rightDiv table thead tr {
+	background-color: #8cc540;
+	color: floralwhite;
+	border-top: 1px solid #0B614B;
+}
+
+#SERVICES #rightDiv table thead th {
+	padding: 5px 3px;
+}
+
+#SERVICES #rightDiv table tbody {
+	
+}
+
+#SERVICES #rightDiv table tbody tr {
+	background-color: #fefefe;
+	border-top: 1px solid #0B614B;
+	color: #0B614B;
+}
+#SERVICES #rightDiv table tbody tr.active {
+	background-color: #ffc;
+}
+
+#SERVICES #rightDiv table tbody tr:hover {
+	background-color: #ffc;
+}
+
+#SERVICES #rightDiv table tbody td {
+	padding: 5px 3px;
+	max-width: 150px;
+	overflow-wrap: break-word;
+}
+
+#SERVICES #rightDiv table tbody td span {
+	
+}
+
+#SERVICES #rightDiv table tbody td span.glyphicon {
+	font-size: 14px;
+	color: #0B614B;
+}
+
+#SERVICES #rightDiv table tbody td span.action {
+	cursor: pointer;
+	margin: 3px;
+}
+
+#SERVICES #rightDiv table tbody td img.typeIcon {
+	width: 10px;
+	height: 10px;
+}
+
+#SERVICES #rightDiv table tbody td p {
+	margin: 0;
+}

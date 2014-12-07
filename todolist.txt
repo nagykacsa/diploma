@@ -1,0 +1,32 @@
+2014.08.05
+unshare - más fájlairól leiratkozhatok, de csak a sajátomról tilthatok le másokat
+delete - adható jog, akkor adhatom másnak, ha a fájl saját, vagy a fájl tulajdonosa jogot adott rá, hogy adhatok másnak törlési jogot. Ha a fájl a sajátom, bárkitõl megvonhatom a törlési jogot, ha másé, akkor csak attól, akinek én adtam.
+share - bárkivel megoszthatom a saját fájlomat (akár egyszerre több emberrel is), más fájlát csak akkor oszthatom tovább, ha a tulajdonostól erre engedélyt kaptam.
+fájl módosítás - saját fájlaimat korlátlanul módosíthatom, másét csak ha engedélyt kaptam rá a tulajdonostól
+
+Settings - skinek (red, green, blue, gray), profil módosítás (ha engedi, akkor a servicek profiljai is)
+
+Service-ek: google, dropbox, facebook, mega.co.nz, yandex.com, box, justcluod
+
+
+csoportok létrehozása - adható admin jog, egy csoportnak több adminja is lehet, file feltöltésnél rákérdez, hogy kivel szeretné megosztani. Egy fájlt meg lehet osztani egy csoporttal, ekkor a csoport összes tagjával meg lesz osztva.
+
+
+
+
+Google Drive: https://developers.google.com/drive/v2/reference/
+Dropbox: https://www.dropbox.com/developers/core/docs
+Yandex: http://api.yandex.com/disk/api/concepts/about.xml
+Box: https://developers.box.com/box-content-tutorials/
+
+
+IDrive: http://evs.idrive.com/web-developers-guide.htm
+Copy: https://developers.copy.com/documentation#authentication/oauth-handshake
+Amazon Cloud: http://docs.aws.amazon.com/AmazonS3/latest/API/APIRest.html
+OpenDrive: http://www.opendrive.com/guide/win/OpenDrive_API_guide.pdf
+Aerofs: https://www.aerofs.com/docs/api/en/1.2/
+MediaFire: http://www.mediafire.com/developers/core_api/1.2/getting_started/
+SurDoc: https://open.surdoc.com/openapi/surdoc-api.do
+
+
+https://gist.github.com/seanrose/5570650

@@ -1,0 +1,11 @@
+<div id="SETTINGS">
+	<h2>Drag from here</h2>
+	<ul data-bind="foreach: items">
+	    <li data-bind="text: $data.name, dragZone: { name: 'lists' }"></li>
+	</ul>
+	
+	<h2>Drop here</h2>
+	<ul data-bind="foreach: target, dropZone: { accepts: 'lists', drop: drop }">
+	    <li data-bind="text: $data.name"></li>
+	</ul>
+</div>

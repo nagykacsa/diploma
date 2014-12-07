@@ -1,0 +1,174 @@
+<div id="DROPBOX" class="service" data-bind="css: {hidden: hidden}">
+	<div id="header" class="clearfix">
+		<h5 data-bind="text: 'Dropbox ('+activeFolder().path+') - ' + userName()" class="float-left"></h5>
+		<div id="headIcon" class="float-right">
+			<!-- <span class="glyphicon glyphicon-minus" data-bind="click: $root.toggleWindow"></span> -->
+			<span class="glyphicon glyphicon-remove" data-bind="click: $root.logout"></span>
+		</div>
+	</div>
+	
+	<div id="content">
+		<div id="iconDiv">
+			<!-- <button class="greyButton glyphicon glyphicon-download-alt" title="Download selected files"
+				data-bind="click: downloadMoreItems.bind()"></button> -->
+			
+			<button class="greyButton glyphicon glyphicon-cloud-upload" title="Upload files"
+				data-bind="click: toggleDiv.bind($root,'uploadContentDiv')"></button>
+			<button class="greyButton glyphicon glyphicon-trash" title="Delete selected files"
+				data-bind="click: toggleDiv.bind($root,'deleteConfirmationDiv')"></button>
+			
+			<button class="greyButton glyphicon glyphicon-export" title="Export selected files"
+				data-bind="click: toggleDiv.bind($root,'exportDiv')"></button>
+			<button class="greyButton glyphicon glyphicon-refresh" title="Refresh file list"
+				data-bind="click: refresh.bind($root)"></button>
+			<!-- <button class="greyButton glyphicon glyphicon-share-alt" title="Share selected files"></button> -->
+			<!-- <button class="greyButton glyphicon glyphicon-share-alt" title="Create folder"></button> -->
+			
+			
+			<!-- ko if: activeFolder().path != 'root' -->
+				<button class="greyButton glyphicon glyphicon-arrow-up" title="Go to parent folder"
+					data-bind="click: goToParent.bind()"></button>
+			<!-- /ko -->
+
+		</div>
+		<div class="scrollableTable" data-bind="dropZone: { accepts: 'lists', drop: drop }">
+			<table>
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="selectAllDropbox" /></th>
+						<th>Filename</th>
+						<th><span title="Shared" class="glyphicon glyphicon-share"></span></th>
+						<th>Size</th>
+						<th>Last modified</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody data-bind="foreach: files">
+					<tr data-bind="click: $root.clickRow.bind($data, $root), dragZone: { name: 'lists' }">
+						<td><img data-bind="attr: {src: '/images/dropbox-api-icons/16x16/'+$data.typeIcon+'.gif'}" /></td>
+		
+						<td><span data-bind="text: $data.name"> </span></td>
+		
+						<td>
+							<!-- ko if: $data.typeIcon == 'folder_user' || $data.typeIcon == 'folder_public' --> 
+								<span title="Shared" class="glyphicon glyphicon-share"></span>
+							<!-- /ko -->
+							<!-- ko if: $data.typeIcon != 'folder_user' && $data.typeIcon != 'folder_public' -->
+								<span title="My Dropbox" class="glyphicon glyphicon-user"></span>
+							<!-- /ko -->
+						</td>
+		
+						<td>
+							<!-- ko switch: $data.mimeType -->
+								<!-- ko case: $default -->
+									<span data-bind="text: $data.humanSize"> </span>
+								<!-- /ko -->
+								<!-- ko case: 'inode/directory' -->
+									<span> DIR </span>
+								<!-- /ko -->
+							<!-- /ko -->
+						</td>
+		
+						<td>
+							<p data-bind="text: $root.getDate($data.modifiedAt)"></p>
+						</td>
+		
+						<td>
+							<!-- ko switch: $data.mimeType -->
+								<!-- ko case: $default --> 
+									<span title="Download" class="action glyphicon glyphicon-download-alt"
+										data-bind="click: $root.downloadItem.bind($data)">
+									</span>
+									<span title="Delete" class="action glyphicon glyphicon-trash"
+										data-bind="click: $root.openDeleteDiv.bind($data,$root)">
+									</span>
+									
+									<!-- <br/> -->
+									
+									<!-- <span class="action glyphicon glyphicon glyphicon-export" title="Export"></span> -->
+									<!-- <span class="action glyphicon glyphicon glyphicon-share-alt" title="Share"></span> -->	
+								<!-- /ko -->
+								<!-- ko case: 'inode/directory' -->
+									<span class="action glyphicon glyphicon-folder-open" title="Open folder"
+										data-bind="click: $root.openFolder.bind($data,$root)"> </span>
+									<span title="Delete" class="action glyphicon glyphicon-trash"
+										data-bind="click: $root.openDeleteDiv.bind($data,$root)">
+									</span>
+								<!-- /ko -->
+							<!-- /ko -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="uploadContentDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="uploadDiv" class="whiteDiv popup">
+				<h4>Upload a file to Dropbox</h4>
+				<input type="file" name="uploader" id="uploader" multiple>
+				<table id="wishList" data-bind="foreach: uploadedFiles">
+					<tr>
+						<td data-bind="text: $data.name"></td>
+						<td><span title="Delete" class="action glyphicon glyphicon-trash"
+								data-bind="click: $root.deleteFromUploadFiles.bind($data,$root)"></span></td>
+					</tr>
+				</table>
+				<button class="greenButton" data-bind="click: upload.bind()">Upload</button>
+				<button class="greyButton" data-bind="click: toggleDiv.bind($root,'uploadContentDiv')">Cancel</button>
+			</div>
+		</div>		
+
+		<div id="deleteItemDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="deleteDiv" class="whiteDiv popup">
+				<h4>Are you sure delete this file?</h4>
+				<div>
+					<!-- ko if: deleted() -->
+						<p data-bind="text: deleted().name"></p>
+					<!-- /ko -->
+				</div>
+				<button class="redButton" data-bind="click: deleteItem.bind($root)">Yes</button>
+				<button class="greyButton" data-bind="click: toggleDiv.bind($root,'deleteItemDiv')">No</button>
+			</div>
+		</div>
+
+		<div id="deleteConfirmationDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="deleteDiv" class="whiteDiv popup">
+				<h4>Are you sure delete selected files?</h4>
+				<div data-bind="foreach: selected">
+					<p data-bind="text: $data.name"></p>
+				</div>
+				<button class="redButton" data-bind="click: deleteMoreItems.bind($root)">Yes</button>
+				<button class="greyButton" data-bind="click: toggleDiv.bind($root,'deleteConfirmationDiv')">No</button>
+			</div>
+		</div>
+		
+		<div id="exportDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="export" class="whiteDiv popup">
+				<h4>Please select where you want to export files!</h4>
+				<div id="checkDiv" data-bind="foreach: getOtherServices">
+					<div class="check" >
+						<img data-bind="attr: {value: $data.id}" src="">
+						<span data-bind="text: $data.name"></span>
+					</div>
+				</div>
+				<!-- <div data-bind="foreach: selected">
+					<p data-bind="text: $data.name"></p>
+				</div> -->
+				<button class="greenButton" data-bind="click: exportItems.bind($root)">Export</button>
+				<button class="greyButton" data-bind="click: toggleDiv.bind($root,'exportDiv')">Cancel</button>
+			</div>
+		</div>
+		
+		<div id="loading" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div class="popup">
+				<img src="/images/loading.gif" width=60 height=60 />
+			</div>
+		</div>
+
+	</div>
+</div>

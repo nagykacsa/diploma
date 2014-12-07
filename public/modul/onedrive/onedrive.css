@@ -1,0 +1,52 @@
+#ONEDRIVE {
+	
+}
+
+#ONEDRIVE #header {
+	padding: 3px;
+	background-color: #8cc540;
+	color: floralwhite;
+}
+
+#ONEDRIVE #header h5 {
+	margin: 0;
+}
+
+#ONEDRIVE #header #headIcon span.glyphicon{
+	cursor: pointer;
+}
+
+#ONEDRIVE #content #iconDiv {
+	padding: 5px;
+}
+
+#ONEDRIVE #content #iconDiv button {
+	
+}
+
+#ONEDRIVE #content #uploadDiv input {
+	margin: 10px auto;
+	/*width: 34%;*/
+}
+
+#ONEDRIVE #content .popupDiv {
+	display: none;
+}
+
+#ONEDRIVE #content .popup {
+	position: absolute;
+	top: 25%;
+	left: 37%;
+	width: 26%;
+	padding: 16px;
+	z-index: 3;
+	overflow: auto;
+	text-align: center;
+	-webkit-box-shadow: 0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+	box-shadow:         0px 0px 15px 5px rgba(50, 50, 50, 0.75);
+}
+
+#ONEDRIVE #content .popup button {
+	margin: 5px 5px 5px 0;
+}

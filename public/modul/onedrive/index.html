@@ -1,0 +1,151 @@
+<div id="ONEDRIVE" class="service" data-bind="css: {hidden: hidden}">
+	<div id="header" class="clearfix">
+		<h5 data-bind="text: 'OneDrive ('+activeFolder().name+') - ' + userName()" class="float-left"></h5>
+		<div id="headIcon" class="float-right">
+			<span class="glyphicon glyphicon-minus" data-bind="click: $root.toggleWindow"></span>
+			<span class="glyphicon glyphicon-remove" data-bind="click: $root.logout"></span>
+		</div>
+	</div>
+	
+	<div id="content">
+		<div id="iconDiv">
+			<!-- <button class="greyButton glyphicon glyphicon-download-alt" title="Download selected files"
+				data-bind="click: downloadMoreItems.bind()"></button> -->
+			
+			<button class="greyButton glyphicon glyphicon-cloud-upload" title="Upload files"
+				data-bind="click: toggleDiv.bind($root,'uploadContentDiv')"></button>
+			<button class="greyButton glyphicon glyphicon-trash" title="Delete selected files"
+				data-bind="click: toggleDiv.bind($root,'deleteConfirmationDiv')"></button>
+			
+			<button class="greyButton glyphicon glyphicon-export" title="Export selected files"></button>
+			<!-- <button class="greyButton glyphicon glyphicon-share-alt" title="Share selected files"></button> -->
+			<!-- <button class="greyButton glyphicon glyphicon-share-alt" title="Create folder"></button> -->
+			
+			
+			<!-- ko if: activeFolder().name != 'SkyDrive' -->
+				<button class="greyButton glyphicon glyphicon-arrow-up" title="Go to parent folder"
+					data-bind="click: goToParent.bind()"></button>
+			<!-- /ko -->
+		</div>
+		<div class="scrollableTable">
+			<table>
+				<thead>
+					<tr>
+						<th><input type="checkbox" id="selectAllDropbox" /></th>
+						<th>Filename</th>
+						<th><span title="Shared" class="glyphicon glyphicon-share"></span></th>
+						<th>Size</th>
+						<th>Last modified</th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody data-bind="foreach: files, dropZone: { accepts: 'lists', drop: drop }">
+					<tr data-bind="click: $root.clickRow.bind($data, $root), dragZone: { name: 'lists' }">
+						<td>
+							<img class="typeIcon" src="images/SkyDrive.png" />
+						</td>
+		
+						<td><span data-bind="text: $data.name"> </span></td>
+		
+						<td>
+							<!-- ko if: !$root.isShared($data) -->
+								<span title="My OneDrive" class="glyphicon glyphicon-user"></span>								
+							<!-- /ko -->
+							<!--ko if: $root.isShared($data) -->
+								<span title="Shared" class="glyphicon glyphicon-share"></span>
+							<!-- /ko -->
+						</td>
+		
+						<td>
+							<!-- ko switch: $data.type -->
+								<!-- ko case: $default -->
+									<span data-bind="text: $data.size"> </span>
+								<!-- /ko -->
+								<!-- ko case: 'folder' -->
+									<span> DIR </span>
+								<!-- /ko -->
+								<!-- ko case: 'album' -->
+									<span> ALBUM </span>
+								<!-- /ko -->
+							<!-- /ko -->
+						</td>
+		
+						<td>
+							<p data-bind="text: $root.getDate($data.client_updated_time)"></p>
+						</td>
+		
+						<td>
+							<!-- ko switch: $data.type -->
+								<!-- ko case: $default --> 
+									<span title="Download" class="action glyphicon glyphicon-download-alt"
+										data-bind="click: $root.downloadItem.bind($data)">
+									</span>
+									<span title="Delete" class="action glyphicon glyphicon-trash"
+										data-bind="click: $root.deleteItem.bind($data,$root)">
+									</span>
+									
+									<br/>
+									
+									<span class="action glyphicon glyphicon glyphicon-export" title="Export"></span>
+									<span class="action glyphicon glyphicon glyphicon-share-alt" title="Share"></span>	
+								<!-- /ko -->
+								<!-- ko case: 'folder' -->
+									<span class="action glyphicon glyphicon-folder-open" title="Open folder"
+										data-bind="click: $root.openFolder.bind($data,$root)"> </span>
+									<span title="Delete" class="action glyphicon glyphicon-trash"
+										data-bind="click: $root.deleteItem.bind($data,$root)">
+									</span>
+								<!-- /ko -->
+								<!-- ko case: 'album' -->
+									<span class="action glyphicon glyphicon-folder-open" title="Open folder"
+										data-bind="click: $root.openFolder.bind($data,$root)"> </span>
+									<span title="Delete" class="action glyphicon glyphicon-trash"
+										data-bind="click: $root.deleteItem.bind($data,$root)">
+									</span>
+								<!-- /ko -->
+							<!-- /ko -->
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+		<div id="uploadContentDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="uploadDiv" class="whiteDiv popup">
+				<h4>Upload a file to Dropbox</h4>
+				<input type="file" name="uploader" id="Muploader">
+				<table id="wishList" data-bind="foreach: uploadedFiles">
+					<tr>
+						<td data-bind="text: $data.name"></td>
+						<td><span title="Delete" class="action glyphicon glyphicon-trash"
+								data-bind="click: $root.deleteFromUploadFiles.bind($data,$root)"></span></td>
+					</tr>
+				</table>
+				<p id="message"></p>
+				<button class="greenButton" data-bind="click: uploadEnd.bind($root,true)">Upload</button>
+				<button class="greyButton" data-bind="click: uploadEnd.bind($root,false)">Cancel</button>
+			</div>
+		</div>		
+
+		<div id="deleteConfirmationDiv" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div id="deleteDiv" class="whiteDiv popup">
+				<h4>Are you sure delete selected files?</h4>
+				<div data-bind="foreach: selected">
+					<p data-bind="text: $data.name"></p>
+				</div>
+				<button class="redButton" data-bind="click: deleteMoreItems.bind($root)">Yes</button>
+				<button class="greyButton" data-bind="click: toggleDiv.bind($root,'deleteConfirmationDiv')">No</button>
+			</div>
+		</div>
+		
+		<div id="loading" class="popupDiv">
+			<div id="fade" class="black_overlay"></div>
+			<div class="popup">
+				<img src="/images/loading.gif" width=60 height=60 />
+			</div>
+		</div>
+		<img src="images/SkyDrive.png" id="imgf" />
+	</div>
+</div>
